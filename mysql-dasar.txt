@@ -1,0 +1,203 @@
+manual xampp :
+masuk ke terminal
+
+-cd xampp/mysql/bin
+-mysql -u root -p
+
+//lalu enter sampai muncul mariadb
+
+-show databases; (untuk lihat apa list database yang ada)
+-create databade namadatabase; (untuk membuat database baru)
+-use namadatabase; (untuk masuk ke database)
+
+-show tables; (untuk lihat tabel dalam database)
+
+//membuat tabel
+-create table namatabel (
+isi_tabel1 tipedata,
+isi_tabel2 tipedata,
+isi_tabel3 tipedata,
+isi_tabel4 tipedata );
+
+-select * from mamatabel; (melihat isi table)
+//Select nim, Nama_Mhs From Mahasiswa; (Menampilkan Kolom Data Tertentu)
+//Select * from Nama_Table where Kondisi; *(Menampilkan Baris Data Tertentu)
+
+-desc namatabel; (meilhat deskripsi table)
+
+-insert into namatable values ("contoh" , "doang", "bro");
+
+-Update Nama_Table Set Nama_Field = 'Data_Baru' Where Nama_Field_Key = 'Data_Key'; (merubah isi table)
+contoh :
+from ujian;
++----------+-------+-------------+--------+
+| nama     | nim   | mata_kuliah | kelas  |
++----------+-------+-------------+--------+
+| rusdi jr | 70302 | ai          | J 0M0K |
++----------+-------+-------------+--------+
+1 row in set (0.000 sec)
+
+MariaDB [praktikum]> update ujian set nama ='narji', mata_kuliah= 'au' where nim='70302';
+Query OK, 1 row affected (0.004 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [praktikum]> select * from ujian;
++-------+-------+-------------+--------+
+| nama  | nim   | mata_kuliah | kelas  |
++-------+-------+-------------+--------+
+| narji | 70302 | au          | J 0M0K |
++-------+-------+-------------+--------+
+
+-Delete From Nama_Table Where Nama_Field_Key (hapus data table)
+contoh:
++--------+-------+-------------+--------+
+| nama   | nim   | mata_kuliah | kelas  |
++--------+-------+-------------+--------+
+| narji  | 70302 | au          | J 0M0K |
+| saruto | 60096 | an          | 4n1m3  |
++--------+-------+-------------+--------+
+2 rows in set (0.000 sec)
+
+MariaDB [praktikum]> delete from ujian where nim='60096';
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [praktikum]> select* from ujian;
++-------+-------+-------------+--------+
+| nama  | nim   | mata_kuliah | kelas  |
++-------+-------+-------------+--------+
+| narji | 70302 | au          | J 0M0K |
++-------+-------+-------------+--------+
+1 row in set (0.000 sec)
+
+-Alter Table Nama_Table Change Nama_Field_Lama Nama_Field_Baru Tipe_Data (Size); (merubah field)
+contoh:
+ desc ujian;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| nama        | varchar(100) | YES  |     | NULL    |       |
+| nim         | varchar(20)  | YES  |     | NULL    |       |
+| mata_kuliah | varchar(20)  | YES  |     | NULL    |       |
+| kelas       | varchar(10)  | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+
+alter table ujian change nama nama_mhsg varchar(100);
+Query OK, 0 rows affected (0.006 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [praktikum]> desc ujian;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| nama_mhsg   | varchar(100) | YES  |     | NULL    |       |
+| nim         | varchar(20)  | YES  |     | NULL    |       |
+| mata_kuliah | varchar(20)  | YES  |     | NULL    |       |
+| kelas       | varchar(10)  | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+
+-alter Table Nama_Table Modify Nama_Field Tipe_Data_Baru (Size); (merubah tipe data)
+contoh : 
+desc ujian;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| nama_mhsg   | varchar(100) | YES  |     | NULL    |       |
+| nim         | varchar(20)  | YES  |     | NULL    |       |
+| mata_kuliah | varchar(20)  | YES  |     | NULL    |       |
+| kelas       | varchar(10)  | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+4 rows in set (0.004 sec)
+
+MariaDB [praktikum]> alter table ujian modify nim char(10);
+Query OK, 1 row affected (0.023 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+MariaDB [praktikum]> desc ujian;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| nama_mhsg   | varchar(100) | YES  |     | NULL    |       |
+| nim         | char(10)     | YES  |     | NULL    |       |
+| mata_kuliah | varchar(20)  | YES  |     | NULL    |       |
+| kelas       | varchar(10)  | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+4 rows in set (0.004 sec)
+
+-Alter Table Nama_Table
+ Add Nama_Field_Baru Tipe_Data (Size); (menambah field) 
+contoh:
+desc ujian;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| nama_mhsg   | varchar(100) | YES  |     | NULL    |       |
+| nim         | char(10)     | YES  |     | NULL    |       |
+| mata_kuliah | varchar(20)  | YES  |     | NULL    |       |
+| kelas       | varchar(10)  | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+4 rows in set (0.004 sec)
+
+MariaDB [praktikum]> alter table ujian add fakultas varchar(20);
+Query OK, 0 rows affected (0.006 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [praktikum]> desc ujian;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| nama_mhsg   | varchar(100) | YES  |     | NULL    |       |
+| nim         | char(10)     | YES  |     | NULL    |       |
+| mata_kuliah | varchar(20)  | YES  |     | NULL    |       |
+| kelas       | varchar(10)  | YES  |     | NULL    |       |
+| fakultas    | varchar(20)  | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+
+-Alter Table Nama_Table Drop Column Nama_Field; (menghapus field)
+contoh : 
+ desc ujian;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| nama_mhsg   | varchar(100) | YES  |     | NULL    |       |
+| nim         | char(10)     | YES  |     | NULL    |       |
+| mata_kuliah | varchar(20)  | YES  |     | NULL    |       |
+| kelas       | varchar(10)  | YES  |     | NULL    |       |
+| fakultas    | varchar(20)  | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+
+MariaDB [praktikum]> alter table ujian drop column kelas;
+Query OK, 0 rows affected (0.005 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [praktikum]> desc ujian;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| nama_mhsg   | varchar(100) | YES  |     | NULL    |       |
+| nim         | char(10)     | YES  |     | NULL    |       |
+| mata_kuliah | varchar(20)  | YES  |     | NULL    |       |
+| fakultas    | varchar(20)  | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+4 rows in set (0.003 sec)
+
+- Drop Table Nama_Table; (meghapus table)
+contoh : 
+MariaDB [praktikum]> show tables;
++---------------------+
+| Tables_in_praktikum |
++---------------------+
+| data                |
+| ujian               |
++---------------------+
+
+MariaDB [praktikum]> show tables;
++---------------------+
+| Tables_in_praktikum |
++---------------------+
+| data                |
++---------------------+
+
+ 
+
+
+
